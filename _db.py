@@ -7,6 +7,11 @@ from settings import CONFIG
 
 class Database:
     def get_conn(self):
+        print(CONFIG.user)
+        print(CONFIG.password)
+        print(CONFIG.host)
+        print(CONFIG.port)
+        print(CONFIG.database)
         try:
             return mysql.connector.connect(
                 user=CONFIG.user,
