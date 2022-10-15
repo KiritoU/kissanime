@@ -29,6 +29,7 @@ class Crawler:
         res = {
             "title": title,
             "genre": genres,
+            "trailer": "",
             "description": description,
         }
         try:

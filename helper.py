@@ -194,7 +194,7 @@ class Helper:
         return thumbId
 
     def insert_taxonomy(self, post_id: int, taxonomies: list, taxonomy_kind: str):
-        taxonomies = taxonomies.split(",")
+        # taxonomies = taxonomies.split(",")
         for taxonomy in taxonomies:
             try:
                 termName = self.format_text(taxonomy)
@@ -306,7 +306,7 @@ class Helper:
             )
 
         database.insert_into(table="term_relationships", data=(postId, 13853, 0))
-        self.insert_taxonomy(postId, movie_details["country"], "country")
+        # self.insert_taxonomy(postId, movie_details["country"], "country")
         self.insert_taxonomy(postId, movie_details["released"], "release")
         self.insert_taxonomy(postId, movie_details["genre"], "genres")
 
@@ -372,10 +372,10 @@ class Helper:
             (postId, "show_trangthai", "0"),
             (postId, "tw_multi_chap", "1"),
             (postId, "chat_luong_video", "HD"),
-            (postId, "country", serie_details["country"]),
-            (postId, "released", serie_details["released"]),
+            # (postId, "country", serie_details["country"]),
+            # (postId, "released", serie_details["released"]),
             (postId, "trailer", serie_details["trailer"]),
-            (postId, "genre", serie_details["genre"]),
+            # (postId, "genre", serie_details["genre"]),
             (postId, "tw_parent", postId),
             (postId, "film_type", "TV SHOW"),
             (postId, "post_views_count", "0"),
@@ -456,10 +456,10 @@ class Helper:
                 "video_link",
                 episode["links"][0],
             ),
-            (postId, "country", episode["country"]),
-            (postId, "released", episode["released"]),
+            # (postId, "country", episode["country"]),
+            # (postId, "released", episode["released"]),
             (postId, "trailer", episode["trailer"]),
-            (postId, "genre", episode["genre"]),
+            # (postId, "genre", episode["genre"]),
             (postId, "post_views_count", "0"),
         ]
 
