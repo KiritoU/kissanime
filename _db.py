@@ -12,14 +12,15 @@ class Database:
         print(CONFIG.host)
         print(CONFIG.port)
         print(CONFIG.database)
+        config = {
+            "user": CONFIG.user,
+            "password": CONFIG.password,
+            "host": CONFIG.host,
+            "port": CONFIG.port,
+            "database": CONFIG.database,
+        }
         try:
-            return mysql.connector.connect(
-                user=CONFIG.user,
-                password=CONFIG.password,
-                host=CONFIG.host,
-                port=CONFIG.port,
-                database=CONFIG.database,
-            )
+            return mysql.connector.connect(**config)
         except Exception as e:
             print(f"Error connecting to MariaDB Platform: {e}")
             sys.exit(1)
