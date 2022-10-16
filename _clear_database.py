@@ -1,13 +1,17 @@
+from cmath import log
 import os
 import shutil
+import logging
 
 from _db import Database
 from settings import CONFIG
 
 database = Database()
+logging.basicConfig(format="%(asctime)s %(levelname)s:%(message)s", level=logging.INFO)
 
 
 def delete_saved_thumbs():
+    logging.info("Deleting saved thumbs")
     files = os.listdir(CONFIG.THUMB_SAVE_PATH)
     for file in files:
         path = f"{CONFIG.THUMB_SAVE_PATH}/{file}"
@@ -25,7 +29,7 @@ def main():
     post_ids = [x[0] for x in post_ids]
 
     for post_id in post_ids:
-
+        logging.info(f"Deleting post: {post_id}")
         _thumbnail_id = database.select_all_from(
             table="postmeta",
             condition=f'post_id={post_id} AND meta_key="_thumbnail_id"',
