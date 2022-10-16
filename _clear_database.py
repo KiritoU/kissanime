@@ -1,7 +1,8 @@
-from cmath import log
 import os
 import shutil
 import logging
+
+from time import sleep
 
 from _db import Database
 from settings import CONFIG
@@ -54,6 +55,8 @@ def main():
             table="posts",
             condition=f'ID="{post_id}"',
         )
+
+        sleep(0.1)
 
 
 if __name__ == "__main__":
