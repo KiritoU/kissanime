@@ -306,7 +306,7 @@ class Helper:
             )
 
         database.insert_into(table="term_relationships", data=(postId, 13853, 0))
-        # self.insert_taxonomy(postId, movie_details["country"], "country")
+        self.insert_taxonomy(postId, ["Japan"], "country")
         self.insert_taxonomy(postId, movie_details["released"], "release")
         self.insert_taxonomy(postId, movie_details["genre"], "genres")
 
@@ -390,7 +390,7 @@ class Helper:
 
         database.insert_into(table="term_relationships", data=(postId, 1, 0))
 
-        # self.insert_taxonomy(postId, serie_details["country"], "country")
+        self.insert_taxonomy(postId, ["Japan"], "country")
         self.insert_taxonomy(postId, serie_details["released"], "release")
         self.insert_taxonomy(postId, serie_details["genre"], "genres")
 
@@ -482,7 +482,7 @@ class Helper:
             )
 
         database.insert_into(table="term_relationships", data=(postId, 1, 0))
-        # self.insert_taxonomy(postId, episode["country"], "country")
+        self.insert_taxonomy(postId, ["Japan"], "country")
         self.insert_taxonomy(postId, episode["released"], "release")
         self.insert_taxonomy(postId, episode["genre"], "genres")
 
@@ -499,6 +499,8 @@ class Helper:
         for episode in serie_details["child_episode"]:
             try:
                 self.insert_serie_episode(episode, serieId, thumbId)
+                sleep(0.1)
+
             except Exception as e:
                 self.error_log(
                     msg=f"Error inserting serie\n{episode}\n{e}",

@@ -22,7 +22,7 @@ class Crawler:
 
         return soup
 
-    def get_episode_details(self, href, title, genres, description) -> list:
+    def get_episode_details(self, href, title, genres) -> list:
         if "http" not in href:
             href = CONFIG.KISSANIME_HOMEPAGE + href
 
@@ -30,7 +30,7 @@ class Crawler:
             "title": title,
             "genre": genres,
             "trailer": "",
-            "description": description,
+            "description": "",
         }
         try:
             soup = self.crawl_soup(href)
@@ -40,6 +40,25 @@ class Crawler:
             res["links"] = [iframe.get("src")]
 
             res["released"] = [helper.get_released_from(soup)]
+
+            try:
+                description = (
+                    soup.find("article", class_="description")
+                    .text.strip()
+                    .strip("\n")
+                    .strip()
+                )
+                for replaceText in CONFIG.DESCRIPTION_REPLACE_TEXTS:
+                    description = description.replace(
+                        replaceText, CONFIG.DESCRIPTION_REPLACE_TO
+                    )
+                res["description"] = description
+
+            except Exception as e:
+                helper.error_log(
+                    msg=f"Error getting description\n{href}\n{e}",
+                    log_file="base.get_episode_details.description.log",
+                )
 
         except Exception as e:
             helper.error_log(
@@ -106,9 +125,7 @@ class Crawler:
                 episodeHref = a_element.get("href")
 
                 serie_details["child_episode"].append(
-                    self.get_episode_details(
-                        episodeHref, episodeTitle, genres, description
-                    )
+                    self.get_episode_details(episodeHref, episodeTitle, genres)
                 )
             except Exception as e:
                 helper.error_log(
