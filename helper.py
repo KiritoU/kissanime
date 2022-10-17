@@ -56,23 +56,18 @@ class Helper:
             )
             return ""
 
-    def get_links_from(self, detail: BeautifulSoup) -> str:
-        res = []
-
+    def get_links_from(self, soup: BeautifulSoup) -> str:
         try:
-            anime_muti_link = detail.find("div", class_="anime_muti_link")
+            mutiserver = soup.find("div", class_="mutiserver")
+            options = mutiserver.find_all("option")
 
-            links = anime_muti_link.find_all("li")
-            for link in links:
-                data_video = link.get("data-video")
-                res.append(data_video)
+            return [option.get("value") for option in options]
         except Exception as e:
             self.error_log(
-                msg=f"Failed to get links from {detail}\n{e}",
-                log_file="get_links.log",
+                msg=f"Failed to get links from {soup}\n{e}",
+                log_file="helper.get_links_from.log",
             )
-
-        return res
+            return []
 
     def get_info_value(self, item: BeautifulSoup) -> str:
         res = []

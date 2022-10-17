@@ -34,10 +34,8 @@ class Crawler:
         }
         try:
             soup = self.crawl_soup(href)
-            play_video = soup.find("div", class_="play-video")
-            iframe = play_video.find("iframe")
 
-            res["links"] = [iframe.get("src")]
+            res["links"] = helper.get_links_from(soup)
 
             res["released"] = [helper.get_released_from(soup)]
 
