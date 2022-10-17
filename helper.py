@@ -306,7 +306,7 @@ class Helper:
             )
 
         database.insert_into(table="term_relationships", data=(postId, 13853, 0))
-        # self.insert_taxonomy(postId, ["Japan"], "country")
+        self.insert_taxonomy(postId, ["Japan"], "country")
         self.insert_taxonomy(postId, movie_details["released"], "release")
         self.insert_taxonomy(postId, movie_details["genre"], "genres")
 
@@ -390,7 +390,7 @@ class Helper:
 
         database.insert_into(table="term_relationships", data=(postId, 1, 0))
 
-        # self.insert_taxonomy(postId, ["Japan"], "country")
+        self.insert_taxonomy(postId, ["Japan"], "country")
         self.insert_taxonomy(postId, serie_details["released"], "release")
         self.insert_taxonomy(postId, serie_details["genre"], "genres")
 
@@ -482,7 +482,7 @@ class Helper:
             )
 
         database.insert_into(table="term_relationships", data=(postId, 1, 0))
-        # self.insert_taxonomy(postId, ["Japan"], "country")
+        self.insert_taxonomy(postId, ["Japan"], "country")
         self.insert_taxonomy(postId, episode["released"], "release")
         self.insert_taxonomy(postId, episode["genre"], "genres")
 
