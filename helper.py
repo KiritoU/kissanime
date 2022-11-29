@@ -45,16 +45,16 @@ class Helper:
 
         return timeupdate
 
-    def get_description_from(self, detail: BeautifulSoup) -> str:
-        try:
-            description = detail.find("div", class_="des").text
-            return description
-        except Exception as e:
-            self.error_log(
-                f"Failed to get description from{detail}\n{e}",
-                log_file="get_description.log",
-            )
-            return ""
+    # def get_description_from(self, detail: BeautifulSoup) -> str:
+    #     try:
+    #         description = detail.find("div", class_="des").text
+    #         return description
+    #     except Exception as e:
+    #         self.error_log(
+    #             f"Failed to get description from{detail}\n{e}",
+    #             log_file="get_description.log",
+    #         )
+    #         return ""
 
     def get_links_from(self, soup: BeautifulSoup) -> str:
         try:
