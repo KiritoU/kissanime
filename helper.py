@@ -383,23 +383,23 @@ class Helper:
                 data=pmeta,
             )
 
-        if serie_details["status"].lower() == "ongoing":
-            database.insert_into(
-                table="term_relationships", data=(postId, CONFIG.ONGOING_TAXONOMY_ID, 0)
-            )
+        # if serie_details["status"].lower() == "ongoing":
+        #     database.insert_into(
+        #         table="term_relationships", data=(postId, CONFIG.ONGOING_TAXONOMY_ID, 0)
+        #     )
 
-        if serie_details["status"].lower() == "completed":
-            database.insert_into(
-                table="term_relationships",
-                data=(postId, CONFIG.COMPLETED_TAXONOMY_ID, 0),
-            )
+        # if serie_details["status"].lower() == "completed":
+        #     database.insert_into(
+        #         table="term_relationships",
+        #         data=(postId, CONFIG.COMPLETED_TAXONOMY_ID, 0),
+        #     )
 
         database.insert_into(table="term_relationships", data=(postId, 1, 0))
 
         # self.insert_taxonomy(postId, ["Japan"], "country")
         self.insert_taxonomy(postId, serie_details["released"], "release")
         self.insert_taxonomy(postId, serie_details["genre"], "genres")
-        # self.insert_taxonomy(postId, serie_details["status"], "status")
+        self.insert_taxonomy(postId, [serie_details["status"]], "status")
 
         return [postId, thumbId]
 
@@ -488,22 +488,22 @@ class Helper:
                 data=pmeta,
             )
 
-        if episode["status"].lower() == "ongoing":
-            database.insert_into(
-                table="term_relationships", data=(postId, CONFIG.ONGOING_TAXONOMY_ID, 0)
-            )
+        # if episode["status"].lower() == "ongoing":
+        #     database.insert_into(
+        #         table="term_relationships", data=(postId, CONFIG.ONGOING_TAXONOMY_ID, 0)
+        #     )
 
-        if episode["status"].lower() == "completed":
-            database.insert_into(
-                table="term_relationships",
-                data=(postId, CONFIG.COMPLETED_TAXONOMY_ID, 0),
-            )
+        # if episode["status"].lower() == "completed":
+        #     database.insert_into(
+        #         table="term_relationships",
+        #         data=(postId, CONFIG.COMPLETED_TAXONOMY_ID, 0),
+        #     )
 
         database.insert_into(table="term_relationships", data=(postId, 1, 0))
         # self.insert_taxonomy(postId, ["Japan"], "country")
         self.insert_taxonomy(postId, episode["released"], "release")
         self.insert_taxonomy(postId, episode["genre"], "genres")
-        # self.insert_taxonomy(postId, episode["status"], "status")
+        self.insert_taxonomy(postId, [episode["status"]], "status")
 
     def insert_serie(self, serie_details: dict):
         try:
@@ -515,6 +515,7 @@ class Helper:
             )
             return
 
+        serie_details["child_episode"].reverse()
         for episode in serie_details["child_episode"]:
             episode["status"] = serie_details["status"]
             try:
